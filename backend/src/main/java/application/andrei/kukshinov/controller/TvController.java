@@ -55,6 +55,7 @@ public class TvController {
         Iterable<WarehouseOfTvs> warehouse = warehouseRepository.findAllByActive(true);
         Set<TvSet> tvSets = new LinkedHashSet<>();
         warehouse.forEach(tvAm -> {
+            System.out.println();
                 tvSets.add(tvAm.getTvModel());
         });
         return tvSets;
@@ -105,3 +106,4 @@ public class TvController {
         return tvRepository.updateTvData(tv, tv.getId());
     }
 }
+

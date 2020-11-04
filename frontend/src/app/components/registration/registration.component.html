@@ -1,0 +1,36 @@
+<form [formGroup]="userForm" style=" background-color: #cddde9" class="text-center border border-light p-5">
+  <!-- Default form subscription -->
+
+  <div class="container" style="padding-left: 25%;padding-right: 25%">
+    <p class="h2 mb-4">Create your own account</p>
+
+    <p>Join our mailing list. We write rarely, but only with the best content.</p>
+    <input type="text" formControlName="name" matInput class="form-control mb-4" placeholder="Name*">
+    <mat-error *ngIf=" userForm.get('name').invalid && userForm.get('name').touched">Field is required!</mat-error>
+
+    <input type="text" formControlName="surname" class="form-control mb-4" placeholder="Surname*">
+    <mat-error *ngIf=" userForm.get('surname').invalid && userForm.get('surname').touched">Field is required!</mat-error>
+
+    <input type="text" formControlName="lastname" class="form-control mb-4" placeholder="Last name">
+
+    <input type="email" formControlName="email" id="defaultSubscriptionFormEmail" class="form-control mb-4" placeholder="E-mail*">
+    <mat-error *ngIf=" userForm.get('email').invalid && userForm.get('email').touched">Field is required!</mat-error>
+
+    <input type="password" formControlName="password" class="form-control mb-4" placeholder="Password*">
+    <mat-error *ngIf=" userForm.get('password').invalid && userForm.get('password').touched">That password sucks...</mat-error>
+
+    <input type="password" formControlName="confirmPass" class="form-control mb-4" placeholder="Confirm password*">
+    <mat-error *ngIf="doPassDiffer() && userForm.get('confirmPass').dirty">Passwords do not match!</mat-error>
+
+    <input type="text" formControlName="phone" class="form-control mb-4" placeholder="Phone">
+    <mat-hint style="color: #7a7b96" align="center">Fields marked with "*" are necessary</mat-hint>
+
+
+    <button mdbBtn color="info" rounded="true" block="true" style="border-radius: 15%"
+            [disabled]="(!(userForm.valid) || doPassDiffer())" (click)="sendData()"
+            type="submit" mdbWavesEffect>Sign in</button>
+
+
+  </div>
+  <!-- Default form subscription -->
+</form>

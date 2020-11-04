@@ -1,0 +1,17 @@
+.registrationButton{
+  background-color: rgba(63, 81, 181, 104);
+  font-weight: lighter;
+  text-decoration: none;
+}
+.hov:hover{
+  cursor: default;
+}
+.hov{
+  cursor: default;
+}
+.whiteTxt{
+  color: white;
+}
+.navFont{
+  font-family: Bahnschrift, serif;
+}

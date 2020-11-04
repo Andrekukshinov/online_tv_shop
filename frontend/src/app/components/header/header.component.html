@@ -1,0 +1,30 @@
+<mdb-navbar class="navFont" SideClass="navbar navbar-expand-lg navbar-dark indigo ">
+  <mdb-navbar-brand>
+    <div class="navbar-brand hov" >Tv</div>
+  </mdb-navbar-brand>
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a routerLink="/" class="nav-link waves-light"  mdbWavesEffect>Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light"  mdbWavesEffect>Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light"  mdbWavesEffect>Pricing</a>
+      </li>
+    </ul>
+    <div class="row  ">
+      <div class="col-md-1"></div>
+      <div class="col-md-4 waves-light" (click)="changeFormVisibility(isLoginFormShown)" mdbWavesEffect><a routerLink="/registration" class="registrationButton whiteTxt" >Log in</a></div>
+      <div class="col-md-1"></div>
+      <div class="col-md-5 waves-light"  mdbWavesEffect><a routerLink="/registration" class="registrationButton whiteTxt ">Registration </a></div>
+      <div class="col-md-1"></div>
+
+    </div>
+  </links>
+
+</mdb-navbar>
+
+
+<app-log-in (close)="changeFormVisibility($event)"  [isLoginFormShown]="isLoginFormShown"></app-log-in>

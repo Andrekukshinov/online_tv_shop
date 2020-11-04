@@ -41,7 +41,8 @@ public class OrderController {
         this.tvRepo = tvRepo;
     }
     private List<WarehouseOfTvs> getWarehouseOfTvsCurrentData(Set<JoinOrderTv> tvInOrder) {
-        List<Long> tvIds = tvInOrder.stream().map(joinOrderTv -> joinOrderTv.getTv().getId()).collect(Collectors.toList());
+        List<Long> tvIds = tvInOrder.stream()
+                .map(joinOrderTv -> joinOrderTv.getTv().getId()).collect(Collectors.toList());
         return warehouseRepo.findTvsInOrder(tvIds);
     }
 
@@ -167,63 +168,3 @@ public class OrderController {
 
     //todo think of possible response entities usages as returning value from methods
 }
-
-
-//
-//
-//
-//
-//class TestMethodTvStatistics {
-//    private int id;
-//
-//    public TestMethodTvStatistics(int id) {
-//        this.id = id;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "g{" + "id=" + id + '}';
-//    }
-//
-//    public static void main(String[] args) {
-//        List<TestMethodTvStatistics> tvList = new ArrayList<>();
-//        tvList.add(new TestMethodTvStatistics(0));
-////        tvList.add(new TestMethodTvStatistics(1));
-////        tvList.add(new TestMethodTvStatistics(1));
-//        tvList.add(new TestMethodTvStatistics(1));
-////        tvList.add(new TestMethodTvStatistics(2));
-////        tvList.add(new TestMethodTvStatistics(3));
-////        tvList.add(new TestMethodTvStatistics(3));
-//        tvList.add(new TestMethodTvStatistics(3));
-//        tvList.add(new TestMethodTvStatistics(3));
-//        tvList.add(new TestMethodTvStatistics(3));
-//        tvList.add(new TestMethodTvStatistics(3));
-//        tvList.add(new TestMethodTvStatistics(4));
-//        tvList.add(new TestMethodTvStatistics(5));
-//        tvList.add(new TestMethodTvStatistics(6));
-//        tvList.add(new TestMethodTvStatistics(8));
-//        tvList.add(new TestMethodTvStatistics(99));
-//        tvList.add(new TestMethodTvStatistics(6));
-//        tvList.add(new TestMethodTvStatistics(7));
-//        TestMethodTvStatistics[] gg = new TestMethodTvStatistics[1];
-//        Map<TestMethodTvStatistics, Integer> tvMap = new TreeMap<>(Comparator.comparingInt(obj -> obj.id));
-//        int maxId = tvList.stream().max(( tv1,  tv2) ->  {
-//            if (tv1.id > tv2.id) {
-//                return 1;
-//            }
-//            else if (tv1.id == tv2.id) {
-//                return 0;
-//            }
-//            else return -1;
-//        }).map(tv -> tv.id).orElse(-1);
-//        IntStream.range(0, maxId + 1).forEach(runner -> {
-//            int count = (int) tvList.stream().filter(elem -> elem.id == runner).peek(TestMethodTvStatistics -> gg[0] = TestMethodTvStatistics).count();
-//            System.out.println("id = " + runner + " count = " + count);
-//            if (count > 0) {
-//                tvMap.put(gg[0], count);
-//            }
-//        });
-//        System.out.println(tvMap);
-//    }
-//
-//}

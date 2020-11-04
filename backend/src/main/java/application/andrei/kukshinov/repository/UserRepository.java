@@ -16,5 +16,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Transactional
     @Query("UPDATE  User user SET user.password =:password WHERE user.id = :id " )
     User updatePassword(@Param("password") String password, @Param("id") long id);
+
     Optional<User> findByUsername(String username);
 }

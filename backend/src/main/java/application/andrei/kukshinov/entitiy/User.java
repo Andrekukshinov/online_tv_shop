@@ -1,10 +1,11 @@
 package application.andrei.kukshinov.entitiy;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-//import org.springframework.security.core.userdetails.UserDetails;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -13,12 +14,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-@Data
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class User /*implements UserDetails */{
+//@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -29,45 +34,33 @@ public class User /*implements UserDetails */{
     @Column(unique = true, name = "email")
     private String username;
     @Column(name = "is_account_active")
-    public boolean isAccountNonExpired;
+    private boolean isAccountNonExpired;
     @Column(name = "is_account_not_locked")
-    public boolean isAccountNonLocked;
+    private boolean isAccountNonLocked;
     @Column(name = "is_enabled")
-    public boolean isEnabled;
+    private boolean isEnabled;
     @Column(name = "is_credentials_not_expired")
-    public boolean isCredentialsNonExpired;
+    private boolean isCredentialsNonExpired;
     private String password;
-    private long phone;
+    private String phone;
     @Column(name = "registration_date")
     private Date registrationDate;
     @Column(name = "avatar_URL")
     private String avatarURL;
-    @OneToMany(mappedBy = "user"/*, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-            CascadeType.REFRESH}*/)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+		  CascadeType.DETACH, CascadeType.REFRESH})
     private List<Order> userOrders = new LinkedList<>();
     @OneToMany(mappedBy = "user"/*, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
             CascadeType.REFRESH }*/)
-    @JsonManagedReference
     private Set<CreditCard> creditCards = new TreeSet<>();
     @OneToMany(mappedBy = "user"/*, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
             CascadeType.REFRESH }*/)
-    @JsonManagedReference
     private Set<Location> location;
 
-    @ManyToMany(cascade = {
-            CascadeType.ALL
-    })
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = {
-                    @JoinColumn(name = "role_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "user_id")
-            }
-    )
-    @JsonManagedReference
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "users_roles", joinColumns = {
+		  @JoinColumn(name = "role_id")}, inverseJoinColumns = {
+		  @JoinColumn(name = "user_id")})
     public Set<Role> authorities;
 
 }
